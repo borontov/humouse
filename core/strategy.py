@@ -4,7 +4,7 @@ from typing import Tuple
 
 import numpy as np
 
-from core.geometry import Point, Spline
+from core.geometry import Point, Spline, WebPoint
 
 
 class Strategy(ABC):
@@ -46,6 +46,11 @@ class Strategy(ABC):
     @classmethod
     @abstractmethod
     def get_points(cls, from_, to_):
+        ...
+
+    @classmethod
+    @abstractmethod
+    def get_random_wandering_destination(cls, current_position):
         ...
 
 
@@ -114,3 +119,13 @@ class HumanLikeStrategy(Strategy):
             points.append(Point(x=x, y=y))
         cls.generate_duration(points)
         return points
+
+    @classmethod
+    def get_random_wandering_destination(cls, current_position):
+        offset_x = random.uniform(-random.randint(50, 600), random.randint(50, 600))
+        offset_y = random.uniform(-random.randint(50, 600), random.randint(50, 600))
+        destination = WebPoint(
+            current_position.x + offset_x,
+            current_position.y + offset_y,
+        )
+        return destination

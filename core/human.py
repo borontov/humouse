@@ -202,12 +202,7 @@ class WebHuman(Human):
 
         while again:
             current_position = self.get_current_mouse_position()
-            offset_x = random.uniform(-random.randint(50, 600), random.randint(50, 600))
-            offset_y = random.uniform(-random.randint(50, 600), random.randint(50, 600))
-            destination = self.point_class(
-                current_position.x + offset_x,
-                current_position.y + offset_y,
-            )
+            destination = self.strategy.get_random_wandering_destination(current_position=current_position)
             self.random_sleep()
             self.move(from_=current_position, to_=destination, never_scroll=True)
             again = random.choice((True, False))
