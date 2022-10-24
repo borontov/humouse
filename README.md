@@ -1,7 +1,5 @@
 Human-like mouse moving framework.
 
-![](humouse.gif)
-
 # Features
 
 - Get web elements position by xpath.
